@@ -1,1 +1,53 @@
-<p>listadojuegos works!</p>
+
+<h1 class="text-center"> Lista de Juegos</h1>
+
+<app-detalles-juego [juego]="juegoSeleccionado"></app-detalles-juego>
+<div class="container mt-3">
+
+<div class="text-center d-flex justify-content-between mb-5">
+    <input 
+    type="text" 
+    class="form-control w-50 mx-auto" 
+    placeholder="Buscar juego..."
+    (input)="buscarJuegos($event, ordenSelect.value)" />
+  
+  <select class="form-select w-25 mx-auto" id="orden" #ordenSelect (change)="buscarJuegos(undefined, ordenSelect.value)">
+    <option value="">Seleccionar</option>
+    <option value="name">Nombre</option>
+    <option value="-released">Fecha de Lanzamiento</option>
+    <option value="-rating">Rating</option>
+  </select>
+    
+  </div>
+  <p>Resultados de la busqueda: {{count}}</p>
+  <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-danger" [disabled]="!previous" (click)="irAPagina(previous)">Anterior</button>
+      <button class="btn btn-danger" [disabled]="!next" (click)="irAPagina(next)">Siguiente</button>
+  </div>
+
+<table class="table table-hover">
+    <thead class="table-danger">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Fecha Lanzamiento</th>
+        <th scope="col">Imagen</th>
+    </tr>
+</thead>
+<tbody class="text-center">
+    @for (juego of ListaJuego; track $index) {
+        <tr (click)="seleccionarJuego(juego)" style="cursor: pointer;">
+            <td> {{juego.id}}</td>
+            <td>{{juego.name}}</td>
+            <td>{{juego.rating}}</td>
+            <td>{{juego.released}}</td>
+            <td>
+                <img width="100" height="100" class="img-fluid" src="{{juego.background_image}}" alt="juego" >
+            </td>
+        </tr>
+    }
+</tbody>
+</table>
+
+</div>
