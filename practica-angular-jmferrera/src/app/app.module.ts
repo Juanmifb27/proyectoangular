@@ -8,6 +8,7 @@ import { DetallesJuegoComponent } from './detalles-juego/detalles-juego.componen
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { Pagina404Component } from './pagina404/pagina404.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { Pagina404Component } from './pagina404/pagina404.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     provideHttpClient()

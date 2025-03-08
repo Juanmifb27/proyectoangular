@@ -13,6 +13,7 @@ export class ListadojuegosComponent {
 
   ListaJuego: Ijuego[] = [];
   busqueda: string = "";
+  ordenamiento: string = "";
   count: number = 0;
   next: string | null = null;
   previous: string | null = null;
@@ -46,14 +47,9 @@ constructor(private rawgService: RawgService){}
   }
   
 
-  buscarJuegos(event?: Event, ordering: string = ''): void {
-    if (event) {
-      const target = event.target as HTMLInputElement;
-      this.busqueda = target.value; // Solo actualiza this.busqueda si viene de un input
-    }
-  
+  buscarJuegos(): void {
     if (this.busqueda.trim()) {
-      this.rawgService.buscarJuegos(this.busqueda, ordering).subscribe({
+      this.rawgService.buscarJuegos(this.busqueda, this.ordenamiento).subscribe({
         next: (result: Irawg) => {
           this.ListaJuego = result.results;
           this.count = result.count;
@@ -65,9 +61,10 @@ constructor(private rawgService: RawgService){}
         }
       });
     } else {
-      this.getJuegos(undefined, ordering);
+      this.getJuegos(undefined, this.ordenamiento);
     }
   }
+  
   
   
 
